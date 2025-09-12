@@ -1,0 +1,24 @@
+{
+  "name": "kw-vault-ai-backend",
+  "version": "1.0.0",
+  "description": "AI-powered yield prediction backend for KW Vault",
+  "main": "ai_api_server.py",
+  "scripts": {
+    "start": "python ai_api_server.py",
+    "train": "python ai_yield_predictor.py",
+    "fetch-data": "python data_fetcher.py",
+    "docker-build": "docker build -t kw-vault-ai .",
+    "docker-run": "docker-compose up -d"
+  },
+  "dependencies": {
+    "flask": "^3.0.0",
+    "tensorflow": "^2.15.0",
+    "numpy": "^1.24.0",
+    "pandas": "^2.1.0",
+    "scikit-learn": "^1.3.0",
+    "requests": "^2.31.0",
+    "python-dotenv": "^1.0.0",
+    "redis": "^5.0.0",
+    "web3": "^6.12.0"
+  }
+}

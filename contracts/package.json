@@ -1,0 +1,18 @@
+{
+  "name": "kw-vault-contracts",
+  "version": "1.0.0",
+  "description": "Smart contracts for KW Vault DeFi protocol",
+  "scripts": {
+    "compile": "hardhat compile",
+    "test": "hardhat test",
+    "deploy:testnet": "hardhat run scripts/deploy.js --network kaia-testnet",
+    "deploy:mainnet": "hardhat run scripts/deploy.js --network kaia-mainnet",
+    "verify": "hardhat verify"
+  },
+  "devDependencies": {
+    "@nomicfoundation/hardhat-toolbox": "^4.0.0",
+    "@openzeppelin/contracts": "^5.0.0",
+    "hardhat": "^2.19.0",
+    "dotenv": "^16.3.1"
+  }
+}
