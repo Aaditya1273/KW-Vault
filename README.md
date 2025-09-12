@@ -1,4 +1,4 @@
-# KW Vault - AI-Driven Cross-Chain Yield Vault
+# KW Vault - AI-Driven Cross-Chain Yield Vault:
 
 ![KW Vault Banner](./public/kw-vault-banner.jpg)
 
