@@ -1,6 +1,7 @@
 "use client"
 
-import { useState } from "react"
+import { useState, useEffect } from "react"
+import { useAccount } from "wagmi"
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
 import { Button } from "@/components/ui/button"
 import { Badge } from "@/components/ui/badge"
@@ -18,6 +19,7 @@ interface PrivacySettings {
 }
 
 export function PrivacyMode() {
+  const { address, isConnected } = useAccount()
   const [privacySettings, setPrivacySettings] = useState<PrivacySettings>({
     zkMeVerified: false,
     privateTransactions: false,
@@ -27,6 +29,23 @@ export function PrivacyMode() {
 
   const [isVerifying, setIsVerifying] = useState(false)
   const [verificationStep, setVerificationStep] = useState(0)
+
+  // REAL DATA PERSISTENCE - Load user's privacy settings
+  useEffect(() => {
+    if (isConnected && address) {
+      const savedSettings = localStorage.getItem(`privacySettings_${address}`)
+      if (savedSettings) {
+        setPrivacySettings(JSON.parse(savedSettings))
+      }
+    }
+  }, [isConnected, address])
+
+  // Save settings to localStorage whenever they change
+  useEffect(() => {
+    if (isConnected && address) {
+      localStorage.setItem(`privacySettings_${address}`, JSON.stringify(privacySettings))
+    }
+  }, [privacySettings, isConnected, address])
 
   const handleZkMeVerification = async () => {
     setIsVerifying(true)
@@ -63,7 +82,7 @@ export function PrivacyMode() {
   return (
     <div className="space-y-6">
       {/* Privacy Overview */}
-      <Card className="border-primary/20 bg-primary/5">
+      <Card className="bg-white/10 dark:bg-white/10 bg-slate-200/50 backdrop-blur-xl border border-white/20 dark:border-white/20 border-slate-300/50 shadow-2xl rounded-2xl">
         <CardHeader>
           <CardTitle className="flex items-center gap-2">
             <Shield className="w-5 h-5" />
@@ -73,21 +92,21 @@ export function PrivacyMode() {
         </CardHeader>
         <CardContent>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-            <div className="text-center p-4 bg-background/50 rounded-lg">
-              <div className="text-2xl font-bold text-primary">{privacyScore}%</div>
-              <div className="text-sm text-muted-foreground">Privacy Score</div>
+            <div className="text-center p-4 bg-white/10 dark:bg-white/10 bg-slate-200/50 backdrop-blur-xl border border-white/20 dark:border-white/20 border-slate-300/50 shadow-2xl rounded-2xl">
+              <div className="text-2xl font-bold text-green-400">{privacyScore}%</div>
+              <div className="text-sm text-white/60 dark:text-white/60 text-slate-600">Privacy Score</div>
             </div>
-            <div className="text-center p-4 bg-background/50 rounded-lg">
-              <div className="text-2xl font-bold text-primary">
+            <div className="text-center p-4 bg-white/10 dark:bg-white/10 bg-slate-200/50 backdrop-blur-xl border border-white/20 dark:border-white/20 border-slate-300/50 shadow-2xl rounded-2xl">
+              <div className="text-2xl font-bold text-blue-400">
                 {privacySettings.zkMeVerified ? "Verified" : "Pending"}
               </div>
-              <div className="text-sm text-muted-foreground">zkMe Status</div>
+              <div className="text-sm text-white/60 dark:text-white/60 text-slate-600">zkMe Status</div>
             </div>
-            <div className="text-center p-4 bg-background/50 rounded-lg">
-              <div className="text-2xl font-bold text-primary">
+            <div className="text-center p-4 bg-white/10 dark:bg-white/10 bg-slate-200/50 backdrop-blur-xl border border-white/20 dark:border-white/20 border-slate-300/50 shadow-2xl rounded-2xl">
+              <div className="text-2xl font-bold text-yellow-400">
                 {privacySettings.privateTransactions ? "ON" : "OFF"}
               </div>
-              <div className="text-sm text-muted-foreground">Private Mode</div>
+              <div className="text-sm text-white/60 dark:text-white/60 text-slate-600">Private Mode</div>
             </div>
           </div>
 
@@ -102,23 +121,23 @@ export function PrivacyMode() {
       </Card>
 
       <Tabs defaultValue="verification" className="space-y-4">
-        <TabsList className="grid w-full grid-cols-3">
-          <TabsTrigger value="verification" className="flex items-center gap-2">
+        <TabsList className="grid w-full grid-cols-3 bg-white/10 dark:bg-white/10 bg-slate-200/50 backdrop-blur-xl border border-white/20 dark:border-white/20 border-slate-300/50 shadow-2xl rounded-2xl p-1">
+          <TabsTrigger value="verification" className="flex items-center gap-2 data-[state=active]:bg-white/20 data-[state=active]:text-white text-white/70 dark:text-white/70 text-slate-600 rounded-xl">
             <UserCheck className="w-4 h-4" />
             zkMe Verification
           </TabsTrigger>
-          <TabsTrigger value="settings" className="flex items-center gap-2">
+          <TabsTrigger value="settings" className="flex items-center gap-2 data-[state=active]:bg-white/20 data-[state=active]:text-white text-white/70 dark:text-white/70 text-slate-600 rounded-xl">
             <Shield className="w-4 h-4" />
             Privacy Settings
           </TabsTrigger>
-          <TabsTrigger value="transactions" className="flex items-center gap-2">
+          <TabsTrigger value="transactions" className="flex items-center gap-2 data-[state=active]:bg-white/20 data-[state=active]:text-white text-white/70 dark:text-white/70 text-slate-600 rounded-xl">
             <Lock className="w-4 h-4" />
             Private Transactions
           </TabsTrigger>
         </TabsList>
 
         <TabsContent value="verification">
-          <Card>
+          <Card className="bg-white/10 dark:bg-white/10 bg-slate-200/50 backdrop-blur-xl border border-white/20 dark:border-white/20 border-slate-300/50 shadow-2xl rounded-2xl">
             <CardHeader>
               <CardTitle>zkMe Identity Verification</CardTitle>
               <CardDescription>
@@ -213,7 +232,7 @@ export function PrivacyMode() {
         </TabsContent>
 
         <TabsContent value="settings">
-          <Card>
+          <Card className="bg-white/10 dark:bg-white/10 bg-slate-200/50 backdrop-blur-xl border border-white/20 dark:border-white/20 border-slate-300/50 shadow-2xl rounded-2xl">
             <CardHeader>
               <CardTitle>Privacy Settings</CardTitle>
               <CardDescription>Configure your privacy preferences and transaction visibility</CardDescription>
@@ -299,7 +318,7 @@ export function PrivacyMode() {
         </TabsContent>
 
         <TabsContent value="transactions">
-          <Card>
+          <Card className="bg-white/10 dark:bg-white/10 bg-slate-200/50 backdrop-blur-xl border border-white/20 dark:border-white/20 border-slate-300/50 shadow-2xl rounded-2xl">
             <CardHeader>
               <CardTitle>Private Transaction History</CardTitle>
               <CardDescription>View your private transactions (only visible to you)</CardDescription>
@@ -354,6 +373,15 @@ export function PrivacyMode() {
           </Card>
         </TabsContent>
       </Tabs>
+
+      {/* Wallet Connection Prompt */}
+      {!isConnected && (
+        <div className="text-center p-8 bg-gradient-to-br from-purple-500/10 to-blue-600/10 rounded-2xl border border-purple-500/20">
+          <Shield className="w-12 h-12 text-purple-400 mx-auto mb-4" />
+          <h3 className="text-xl font-bold text-white mb-2">Connect Wallet for Privacy Features</h3>
+          <p className="text-white/60">Connect your wallet to access privacy settings and zkMe verification</p>
+        </div>
+      )}
     </div>
   )
 }

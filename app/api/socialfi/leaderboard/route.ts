@@ -1,5 +1,6 @@
 import { type NextRequest, NextResponse } from "next/server"
 import { connectToDatabase } from "@/lib/mongodb"
+import { UserDataSchema } from "@/lib/types"
 
 export async function GET(request: NextRequest) {
   try {
@@ -21,38 +22,73 @@ export async function GET(request: NextRequest) {
       })
       .toArray()
 
-    // Add rank numbers
-    const rankedLeaderboard = leaderboard.map((user, index) => ({
-      ...user,
-      rank: index + 1,
-    }))
+    // Validate and transform data
+    const validatedLeaderboard = leaderboard.map((user, index) => {
+      const userData = {
+        ...user,
+        rank: index + 1,
+        kwTokenBalance: user.kwTokenBalance || 0,
+        totalDeposited: user.totalDeposited || 0,
+        missionsCompleted: user.missionsCompleted || 0,
+      }
+      
+      // Validate each user entry
+      return UserDataSchema.parse(userData)
+    })
 
-    return NextResponse.json(rankedLeaderboard)
+    return NextResponse.json(validatedLeaderboard)
   } catch (error) {
     console.error("Error fetching leaderboard:", error)
-    return NextResponse.json({ error: "Failed to fetch leaderboard" }, { status: 500 })
+    
+    const errorMessage = error instanceof Error ? error.message : "Unknown error occurred"
+    return NextResponse.json(
+      { 
+        error: "Failed to fetch leaderboard",
+        details: errorMessage,
+        timestamp: new Date().toISOString()
+      }, 
+      { status: 500 }
+    )
   }
 }
 
 export async function POST(request: NextRequest) {
   try {
-    const { address, kwTokens, action } = await request.json()
+    const body = await request.json()
+    
+    // Validate input data
+    const { address, kwTokens, action } = body
+    if (!address || typeof kwTokens !== 'number' || !action) {
+      return NextResponse.json(
+        { error: "Invalid input: address, kwTokens (number), and action are required" },
+        { status: 400 }
+      )
+    }
+
+    // Validate address format
+    if (!/^0x[a-fA-F0-9]{40}$/.test(address)) {
+      return NextResponse.json(
+        { error: "Invalid Ethereum address format" },
+        { status: 400 }
+      )
+    }
+
     const { db } = await connectToDatabase()
 
-    // Update user KW token balance
-    await db.collection("users").updateOne(
+    // Update user KW token balance with proper typing
+    const updateResult = await db.collection("users").updateOne(
       { address },
       {
         $inc: { kwTokenBalance: kwTokens },
         $push: {
           activities: {
-            action,
-            tokens: kwTokens,
+            action: String(action),
+            tokens: Number(kwTokens),
             timestamp: new Date(),
-          },
+          } as any, // Type assertion to handle MongoDB typing issues
         },
         $setOnInsert: {
-          address,
+          address: String(address),
           totalDeposited: 0,
           missionsCompleted: 0,
           createdAt: new Date(),
@@ -61,9 +97,23 @@ export async function POST(request: NextRequest) {
       { upsert: true },
     )
 
-    return NextResponse.json({ success: true })
+    return NextResponse.json({ 
+      success: true,
+      modified: updateResult.modifiedCount > 0,
+      upserted: updateResult.upsertedCount > 0,
+      timestamp: new Date().toISOString()
+    })
   } catch (error) {
     console.error("Error updating user tokens:", error)
-    return NextResponse.json({ error: "Failed to update tokens" }, { status: 500 })
+    
+    const errorMessage = error instanceof Error ? error.message : "Unknown error occurred"
+    return NextResponse.json(
+      { 
+        error: "Failed to update tokens",
+        details: errorMessage,
+        timestamp: new Date().toISOString()
+      }, 
+      { status: 500 }
+    )
   }
 }

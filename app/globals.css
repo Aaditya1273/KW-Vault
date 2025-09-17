@@ -1,129 +1,92 @@
-@import "tailwindcss";
-@import "tw-animate-css";
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
 
-@custom-variant dark (&:is(.dark *));
-
-:root {
-  /* Updated color tokens for KW Vault DeFi theme */
-  --background: oklch(1 0 0); /* #ffffff */
-  --foreground: oklch(0.35 0.02 258); /* #475569 */
-  --card: oklch(0.97 0.01 258); /* #f1f5f9 */
-  --card-foreground: oklch(0.35 0.02 258); /* #475569 */
-  --popover: oklch(1 0 0); /* #ffffff */
-  --popover-foreground: oklch(0.35 0.02 258); /* #475569 */
-  --primary: oklch(0.45 0.15 162); /* #059669 emerald-600 */
-  --primary-foreground: oklch(1 0 0); /* #ffffff */
-  --secondary: oklch(0.55 0.15 162); /* #10b981 emerald-500 */
-  --secondary-foreground: oklch(1 0 0); /* #ffffff */
-  --muted: oklch(0.97 0.01 258); /* #f1f5f9 */
-  --muted-foreground: oklch(0.35 0.02 258); /* #475569 */
-  --accent: oklch(0.55 0.15 162); /* #10b981 emerald-500 */
-  --accent-foreground: oklch(1 0 0); /* #ffffff */
-  --destructive: oklch(0.55 0.22 27); /* #ea580c */
-  --destructive-foreground: oklch(1 0 0); /* #ffffff */
-  --border: oklch(0.92 0.01 258); /* #e2e8f0 */
-  --input: oklch(1 0 0); /* #ffffff */
-  --ring: oklch(0.45 0.15 162 / 0.5); /* emerald-600 with opacity */
-  --chart-1: oklch(0.45 0.15 162); /* #059669 */
-  --chart-2: oklch(0.55 0.15 162); /* #10b981 */
-  --chart-3: oklch(0.32 0.02 258); /* #4b5563 */
-  --chart-4: oklch(0.65 0.18 27); /* #f97316 */
-  --chart-5: oklch(0.55 0.22 27); /* #ea580c */
-  --radius: 0.5rem;
-  --sidebar: oklch(0.97 0.01 258); /* #f1f5f9 */
-  --sidebar-foreground: oklch(0.35 0.02 258); /* #475569 */
-  --sidebar-primary: oklch(0.45 0.15 162); /* #059669 */
-  --sidebar-primary-foreground: oklch(1 0 0); /* #ffffff */
-  --sidebar-accent: oklch(0.55 0.15 162); /* #10b981 */
-  --sidebar-accent-foreground: oklch(1 0 0); /* #ffffff */
-  --sidebar-border: oklch(0.92 0.01 258); /* #e2e8f0 */
-  --sidebar-ring: oklch(0.45 0.15 162 / 0.5); /* emerald-600 with opacity */
-}
-
-.dark {
-  /* Updated dark mode tokens for professional DeFi look */
-  --background: oklch(0.08 0.01 258); /* #0f172a */
-  --foreground: oklch(0.95 0.01 258); /* #f1f5f9 */
-  --card: oklch(0.12 0.01 258); /* #1e293b */
-  --card-foreground: oklch(0.95 0.01 258); /* #f1f5f9 */
-  --popover: oklch(0.12 0.01 258); /* #1e293b */
-  --popover-foreground: oklch(0.95 0.01 258); /* #f1f5f9 */
-  --primary: oklch(0.55 0.15 162); /* #10b981 emerald-500 */
-  --primary-foreground: oklch(0.08 0.01 258); /* #0f172a */
-  --secondary: oklch(0.2 0.01 258); /* #334155 */
-  --secondary-foreground: oklch(0.95 0.01 258); /* #f1f5f9 */
-  --muted: oklch(0.2 0.01 258); /* #334155 */
-  --muted-foreground: oklch(0.7 0.01 258); /* #94a3b8 */
-  --accent: oklch(0.55 0.15 162); /* #10b981 emerald-500 */
-  --accent-foreground: oklch(0.08 0.01 258); /* #0f172a */
-  --destructive: oklch(0.65 0.22 27); /* #f97316 */
-  --destructive-foreground: oklch(0.08 0.01 258); /* #0f172a */
-  --border: oklch(0.2 0.01 258); /* #334155 */
-  --input: oklch(0.12 0.01 258); /* #1e293b */
-  --ring: oklch(0.55 0.15 162 / 0.5); /* emerald-500 with opacity */
-  --chart-1: oklch(0.55 0.15 162); /* #10b981 */
-  --chart-2: oklch(0.45 0.15 162); /* #059669 */
-  --chart-3: oklch(0.7 0.01 258); /* #94a3b8 */
-  --chart-4: oklch(0.65 0.18 27); /* #f97316 */
-  --chart-5: oklch(0.55 0.22 27); /* #ea580c */
-  --sidebar: oklch(0.12 0.01 258); /* #1e293b */
-  --sidebar-foreground: oklch(0.95 0.01 258); /* #f1f5f9 */
-  --sidebar-primary: oklch(0.55 0.15 162); /* #10b981 */
-  --sidebar-primary-foreground: oklch(0.08 0.01 258); /* #0f172a */
-  --sidebar-accent: oklch(0.45 0.15 162); /* #059669 */
-  --sidebar-accent-foreground: oklch(0.95 0.01 258); /* #f1f5f9 */
-  --sidebar-border: oklch(0.2 0.01 258); /* #334155 */
-  --sidebar-ring: oklch(0.55 0.15 162 / 0.5); /* emerald-500 with opacity */
-}
-
-@theme inline {
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --color-card: var(--card);
-  --color-card-foreground: var(--card-foreground);
-  --color-popover: var(--popover);
-  --color-popover-foreground: var(--popover-foreground);
-  --color-primary: var(--primary);
-  --color-primary-foreground: var(--primary-foreground);
-  --color-secondary: var(--secondary);
-  --color-secondary-foreground: var(--secondary-foreground);
-  --color-muted: var(--muted);
-  --color-muted-foreground: var(--muted-foreground);
-  --color-accent: var(--accent);
-  --color-accent-foreground: var(--accent-foreground);
-  --color-destructive: var(--destructive);
-  --color-destructive-foreground: var(--destructive-foreground);
-  --color-border: var(--border);
-  --color-input: var(--input);
-  --color-ring: var(--ring);
-  --color-chart-1: var(--chart-1);
-  --color-chart-2: var(--chart-2);
-  --color-chart-3: var(--chart-3);
-  --color-chart-4: var(--chart-4);
-  --color-chart-5: var(--chart-5);
-  --radius-sm: calc(var(--radius) - 4px);
-  --radius-md: calc(var(--radius) - 2px);
-  --radius-lg: var(--radius);
-  --radius-xl: calc(var(--radius) + 4px);
-  --color-sidebar: var(--sidebar);
-  --color-sidebar-foreground: var(--sidebar-foreground);
-  --color-sidebar-primary: var(--sidebar-primary);
-  --color-sidebar-primary-foreground: var(--sidebar-primary-foreground);
-  --color-sidebar-accent: var(--sidebar-accent);
-  --color-sidebar-accent-foreground: var(--sidebar-accent-foreground);
-  --color-sidebar-border: var(--sidebar-border);
-  --color-sidebar-ring: var(--sidebar-ring);
-}
-
+/* MODERN DESIGN SYSTEM - KW VAULT */
 @layer base {
-  * {
-    @apply border-border outline-ring/50;
+  :root {
+    /* Brand Colors - Kaia Ecosystem */
+    --kaia-primary: 142 76% 36%;     /* Kaia Green */
+    --kaia-secondary: 142 84% 47%;   /* Bright Green */
+    --kaia-accent: 197 71% 52%;      /* Ocean Blue */
+    --kaia-warning: 43 96% 56%;      /* Golden Yellow */
+    --kaia-success: 142 76% 36%;     /* Success Green */
+    --kaia-error: 0 84% 60%;         /* Error Red */
+    
+    /* Semantic Colors */
+    --background: 0 0% 100%;
+    --foreground: 224 71% 4%;
+    --card: 0 0% 100%;
+    --card-foreground: 224 71% 4%;
+    --popover: 0 0% 100%;
+    --popover-foreground: 224 71% 4%;
+    --primary: var(--kaia-primary);
+    --primary-foreground: 210 20% 98%;
+    --secondary: 220 14% 96%;
+    --secondary-foreground: 220 9% 46%;
+    --muted: 220 14% 96%;
+    --muted-foreground: 220 9% 46%;
+    --accent: var(--kaia-accent);
+    --accent-foreground: 210 20% 98%;
+    --destructive: var(--kaia-error);
+    --destructive-foreground: 210 20% 98%;
+    --border: 220 13% 91%;
+    --input: 220 13% 91%;
+    --ring: var(--kaia-primary);
+    --radius: 0.75rem;
+    
+    /* Glassmorphism */
+    --glass-bg: rgba(255, 255, 255, 0.25);
+    --glass-border: rgba(255, 255, 255, 0.18);
+    --glass-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
+    
+    /* Gradients */
+    --gradient-primary: linear-gradient(135deg, hsl(var(--kaia-primary)) 0%, hsl(var(--kaia-secondary)) 100%);
+    --gradient-accent: linear-gradient(135deg, hsl(var(--kaia-accent)) 0%, hsl(197 71% 73%) 100%);
+    --gradient-surface: linear-gradient(135deg, rgba(255,255,255,0.1) 0%, rgba(255,255,255,0.05) 100%);
+    
+    /* Chart Colors */
+    --chart-1: var(--kaia-primary);
+    --chart-2: var(--kaia-accent);
+    --chart-3: var(--kaia-warning);
+    --chart-4: 280 65% 60%;
+    --chart-5: 340 75% 55%;
   }
-  body {
-    @apply bg-background text-foreground;
+
+  .dark {
+    /* Dark Mode Colors */
+    --background: 224 71% 4%;
+    --foreground: 210 20% 98%;
+    --card: 224 71% 4%;
+    --card-foreground: 210 20% 98%;
+    --popover: 224 71% 4%;
+    --popover-foreground: 210 20% 98%;
+    --primary: var(--kaia-secondary);
+    --primary-foreground: 220 9% 9%;
+    --secondary: 215 27% 17%;
+    --secondary-foreground: 210 20% 98%;
+    --muted: 215 27% 17%;
+    --muted-foreground: 217 10% 65%;
+    --accent: var(--kaia-accent);
+    --accent-foreground: 210 20% 98%;
+    --destructive: 0 62% 31%;
+    --destructive-foreground: 210 20% 98%;
+    --border: 215 27% 17%;
+    --input: 215 27% 17%;
+    --ring: var(--kaia-secondary);
+    
+    /* Dark Glassmorphism */
+    --glass-bg: rgba(15, 23, 42, 0.25);
+    --glass-border: rgba(148, 163, 184, 0.18);
+    --glass-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
+    
+    /* Dark Gradients */
+    --gradient-surface: linear-gradient(135deg, rgba(15,23,42,0.1) 0%, rgba(15,23,42,0.05) 100%);
   }
+}
+body {
+  background-color: hsl(var(--background));
+  color: hsl(var(--foreground));
 }
 
 /* Added custom animations for DeFi interface */
@@ -154,4 +117,132 @@
 
 .animate-slide-up {
   animation: slide-up 0.3s ease-out;
+}
+
+/* GLASSMORPHISM UTILITIES */
+@layer utilities {
+  .glass {
+    background: var(--glass-bg);
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+    border: 1px solid var(--glass-border);
+    box-shadow: var(--glass-shadow);
+  }
+
+  .glass-card {
+    @apply glass rounded-2xl;
+  }
+
+  .gradient-primary {
+    background: var(--gradient-primary);
+  }
+
+  .gradient-accent {
+    background: var(--gradient-accent);
+  }
+
+  .gradient-surface {
+    background: var(--gradient-surface);
+  }
+
+  /* ANIMATIONS */
+  .animate-float {
+    animation: float 6s ease-in-out infinite;
+  }
+
+  .animate-glow {
+    animation: glow 2s ease-in-out infinite alternate;
+  }
+
+  .animate-fade-in {
+    animation: fadeIn 0.3s ease-out;
+  }
+
+  .animate-scale-in {
+    animation: scale-in 0.2s ease-out;
+  }
+
+  .animate-slide-in-from-top {
+    animation: slide-in-from-top 0.3s ease-out;
+  }
+
+  .animate-slide-out-to-top {
+    animation: slide-out-to-top 0.3s ease-in;
+  }
+}
+
+/* KEYFRAMES */
+@keyframes float {
+  0%, 100% { transform: translateY(0px); }
+  50% { transform: translateY(-10px); }
+}
+
+@keyframes glow {
+  from { box-shadow: 0 0 20px hsl(var(--kaia-primary) / 0.5); }
+  to { box-shadow: 0 0 30px hsl(var(--kaia-primary) / 0.8), 0 0 40px hsl(var(--kaia-primary) / 0.3); }
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@keyframes scaleIn {
+  from {
+    opacity: 0;
+    transform: scale(0.95);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+@keyframes slide-in-from-top {
+  from {
+    opacity: 0;
+    transform: translateY(-20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes slide-out-to-top {
+  from {
+    opacity: 1;
+    transform: translateY(0);
+  }
+  to {
+    opacity: 0;
+    transform: translateY(-20px);
+  }
+}
+
+/* COMPONENT STYLES */
+@layer components {
+  .container-modern {
+    @apply max-w-none w-full px-8 lg:px-16 xl:px-24;
+  }
+  
+  .container-wide {
+    @apply max-w-[1600px] mx-auto px-8 lg:px-16 xl:px-24;
+  }
+
+  .section-padding {
+    @apply py-16 sm:py-20 lg:py-24;
+  }
+
+  .text-gradient {
+    @apply bg-gradient-to-r from-primary to-primary/70 bg-clip-text text-transparent;
+  }
+
+  .text-gradient-accent {
+    @apply bg-gradient-to-r from-accent to-accent/70 bg-clip-text text-transparent;
+  }
+
+  .card-gradient {
+    @apply bg-gradient-to-br from-white/10 to-white/5 dark:from-white/5 dark:to-white/0 backdrop-blur-xl border border-white/20 dark:border-white/10 rounded-2xl p-6 shadow-xl;
+  }
 }

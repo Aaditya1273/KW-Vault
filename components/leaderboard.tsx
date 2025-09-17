@@ -125,7 +125,7 @@ export function Leaderboard() {
   return (
     <div className="space-y-6">
       {/* Leaderboard Header */}
-      <Card>
+      <Card className="bg-white/10 dark:bg-white/10 bg-slate-200/50 backdrop-blur-xl border border-white/20 dark:border-white/20 border-slate-300/50 shadow-2xl rounded-2xl">
         <CardHeader>
           <CardTitle className="flex items-center gap-2">
             <Trophy className="w-5 h-5" />
@@ -135,17 +135,17 @@ export function Leaderboard() {
         </CardHeader>
         <CardContent>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-            <div className="text-center p-4 bg-muted/50 rounded-lg">
-              <div className="text-2xl font-bold text-primary">#42</div>
-              <div className="text-sm text-muted-foreground">Your Rank</div>
+            <div className="text-center p-4 bg-white/10 dark:bg-white/10 bg-slate-200/50 backdrop-blur-xl border border-white/20 dark:border-white/20 border-slate-300/50 shadow-2xl rounded-2xl">
+              <div className="text-2xl font-bold text-green-400">#42</div>
+              <div className="text-sm text-white/60 dark:text-white/60 text-slate-600">Your Rank</div>
             </div>
-            <div className="text-center p-4 bg-muted/50 rounded-lg">
-              <div className="text-2xl font-bold text-primary">1,250</div>
-              <div className="text-sm text-muted-foreground">Your Score</div>
+            <div className="text-center p-4 bg-white/10 dark:bg-white/10 bg-slate-200/50 backdrop-blur-xl border border-white/20 dark:border-white/20 border-slate-300/50 shadow-2xl rounded-2xl">
+              <div className="text-2xl font-bold text-blue-400">1,250</div>
+              <div className="text-sm text-white/60 dark:text-white/60 text-slate-600">Your Score</div>
             </div>
-            <div className="text-center p-4 bg-muted/50 rounded-lg">
-              <div className="text-2xl font-bold text-primary">+15</div>
-              <div className="text-sm text-muted-foreground">This Week</div>
+            <div className="text-center p-4 bg-white/10 dark:bg-white/10 bg-slate-200/50 backdrop-blur-xl border border-white/20 dark:border-white/20 border-slate-300/50 shadow-2xl rounded-2xl">
+              <div className="text-2xl font-bold text-yellow-400">+15</div>
+              <div className="text-sm text-white/60 dark:text-white/60 text-slate-600">This Week</div>
             </div>
           </div>
         </CardContent>
@@ -153,23 +153,23 @@ export function Leaderboard() {
 
       {/* Leaderboard Tabs */}
       <Tabs defaultValue="earnings" className="space-y-4">
-        <TabsList className="grid w-full grid-cols-3">
-          <TabsTrigger value="earnings" className="flex items-center gap-2">
+        <TabsList className="grid w-full grid-cols-3 bg-white/10 dark:bg-white/10 bg-slate-200/50 backdrop-blur-xl border border-white/20 dark:border-white/20 border-slate-300/50 shadow-2xl rounded-2xl p-1">
+          <TabsTrigger value="earnings" className="flex items-center gap-2 data-[state=active]:bg-white/20 data-[state=active]:text-white text-white/70 dark:text-white/70 text-slate-600 rounded-xl">
             <TrendingUp className="w-4 h-4" />
             Top Earners
           </TabsTrigger>
-          <TabsTrigger value="deposits" className="flex items-center gap-2">
+          <TabsTrigger value="deposits" className="flex items-center gap-2 data-[state=active]:bg-white/20 data-[state=active]:text-white text-white/70 dark:text-white/70 text-slate-600 rounded-xl">
             <DollarSign className="w-4 h-4" />
             Top Depositors
           </TabsTrigger>
-          <TabsTrigger value="missions" className="flex items-center gap-2">
+          <TabsTrigger value="missions" className="flex items-center gap-2 data-[state=active]:bg-white/20 data-[state=active]:text-white text-white/70 dark:text-white/70 text-slate-600 rounded-xl">
             <Target className="w-4 h-4" />
             Mission Masters
           </TabsTrigger>
         </TabsList>
 
         <TabsContent value="earnings">
-          <Card>
+          <Card className="bg-white/10 dark:bg-white/10 bg-slate-200/50 backdrop-blur-xl border border-white/20 dark:border-white/20 border-slate-300/50 shadow-2xl rounded-2xl">
             <CardHeader>
               <CardTitle>Top Earners (30 Days)</CardTitle>
               <CardDescription>Users with highest yield earnings this month</CardDescription>
@@ -219,7 +219,7 @@ export function Leaderboard() {
         </TabsContent>
 
         <TabsContent value="deposits">
-          <Card>
+          <Card className="bg-white/10 dark:bg-white/10 bg-slate-200/50 backdrop-blur-xl border border-white/20 dark:border-white/20 border-slate-300/50 shadow-2xl rounded-2xl">
             <CardHeader>
               <CardTitle>Top Depositors (All Time)</CardTitle>
               <CardDescription>Users with highest total deposits in KW Vault</CardDescription>
@@ -269,7 +269,7 @@ export function Leaderboard() {
         </TabsContent>
 
         <TabsContent value="missions">
-          <Card>
+          <Card className="bg-white/10 dark:bg-white/10 bg-slate-200/50 backdrop-blur-xl border border-white/20 dark:border-white/20 border-slate-300/50 shadow-2xl rounded-2xl">
             <CardHeader>
               <CardTitle>Mission Masters</CardTitle>
               <CardDescription>Users with most completed missions and highest XP</CardDescription>

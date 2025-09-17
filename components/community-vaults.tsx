@@ -120,7 +120,7 @@ export function CommunityVaults() {
   return (
     <div className="space-y-6">
       {/* Community Overview */}
-      <Card>
+      <Card className="bg-white/10 dark:bg-white/10 bg-slate-200/50 backdrop-blur-xl border border-white/20 dark:border-white/20 border-slate-300/50 shadow-2xl rounded-2xl">
         <CardHeader>
           <CardTitle className="flex items-center gap-2">
             <Users className="w-5 h-5" />
@@ -132,21 +132,21 @@ export function CommunityVaults() {
         </CardHeader>
         <CardContent>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-            <div className="text-center p-4 bg-muted/50 rounded-lg">
-              <div className="text-2xl font-bold text-primary">{myVaults.length}</div>
-              <div className="text-sm text-muted-foreground">Joined Vaults</div>
+            <div className="text-center p-4 bg-white/10 dark:bg-white/10 bg-slate-200/50 backdrop-blur-xl border border-white/20 dark:border-white/20 border-slate-300/50 shadow-2xl rounded-2xl">
+              <div className="text-2xl font-bold text-green-400">{myVaults.length}</div>
+              <div className="text-sm text-white/60 dark:text-white/60 text-slate-600">Joined Vaults</div>
             </div>
-            <div className="text-center p-4 bg-muted/50 rounded-lg">
-              <div className="text-2xl font-bold text-primary">
+            <div className="text-center p-4 bg-white/10 dark:bg-white/10 bg-slate-200/50 backdrop-blur-xl border border-white/20 dark:border-white/20 border-slate-300/50 shadow-2xl rounded-2xl">
+              <div className="text-2xl font-bold text-blue-400">
                 ${myVaults.reduce((sum, v) => sum + v.tvl, 0).toLocaleString()}
               </div>
-              <div className="text-sm text-muted-foreground">Combined TVL</div>
+              <div className="text-sm text-white/60 dark:text-white/60 text-slate-600">Combined TVL</div>
             </div>
-            <div className="text-center p-4 bg-muted/50 rounded-lg">
-              <div className="text-2xl font-bold text-primary">
+            <div className="text-center p-4 bg-white/10 dark:bg-white/10 bg-slate-200/50 backdrop-blur-xl border border-white/20 dark:border-white/20 border-slate-300/50 shadow-2xl rounded-2xl">
+              <div className="text-2xl font-bold text-yellow-400">
                 {myVaults.length > 0 ? (myVaults.reduce((sum, v) => sum + v.apy, 0) / myVaults.length).toFixed(1) : 0}%
               </div>
-              <div className="text-sm text-muted-foreground">Avg APY</div>
+              <div className="text-sm text-white/60 dark:text-white/60 text-slate-600">Avg APY</div>
             </div>
           </div>
         </CardContent>
@@ -158,7 +158,7 @@ export function CommunityVaults() {
           <h3 className="text-lg font-semibold">My Community Vaults</h3>
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-4">
             {myVaults.map((vault) => (
-              <Card key={vault.id} className="border-primary/20 bg-primary/5">
+              <Card key={vault.id} className="bg-white/10 dark:bg-white/10 bg-slate-200/50 backdrop-blur-xl border border-white/20 dark:border-white/20 border-slate-300/50 shadow-2xl rounded-2xl">
                 <CardContent className="p-6">
                   <div className="space-y-4">
                     <div className="flex items-start justify-between">
@@ -219,7 +219,7 @@ export function CommunityVaults() {
         <h3 className="text-lg font-semibold">Discover Community Vaults</h3>
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-4">
           {availableVaults.map((vault) => (
-            <Card key={vault.id} className="hover:shadow-md transition-shadow">
+            <Card key={vault.id} className="bg-white/10 dark:bg-white/10 bg-slate-200/50 backdrop-blur-xl border border-white/20 dark:border-white/20 border-slate-300/50 shadow-2xl rounded-2xl hover:shadow-3xl transition-all duration-300">
               <CardContent className="p-6">
                 <div className="space-y-4">
                   <div className="flex items-start justify-between">

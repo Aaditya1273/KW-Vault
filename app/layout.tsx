@@ -1,11 +1,11 @@
 import type React from "react"
-import type { Metadata } from "next"
-import { GeistSans } from "geist/font/sans"
-import { GeistMono } from "geist/font/mono"
-import { Analytics } from "@vercel/analytics/next"
-import { ThemeProvider } from "@/components/theme-provider"
+import type { Metadata, Viewport } from "next"
+import { Inter } from "next/font/google"
+import { Providers } from "@/components/providers"
 import { Suspense } from "react"
 import "./globals.css"
+
+const inter = Inter({ subsets: ["latin"] })
 
 export const metadata: Metadata = {
   title: "KW Vault - AI-Driven Cross-Chain Yield Vault",
@@ -13,7 +13,12 @@ export const metadata: Metadata = {
   generator: "KW Vault",
   keywords: ["DeFi", "Yield Farming", "AI", "Cross-Chain", "Kaia", "USDT", "Vault"],
   authors: [{ name: "KW Vault Team" }],
-  viewport: "width=device-width, initial-scale=1, maximum-scale=1",
+}
+
+export const viewport: Viewport = {
+  width: "device-width",
+  initialScale: 1,
+  maximumScale: 1,
 }
 
 export default function RootLayout({
@@ -23,13 +28,12 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" suppressHydrationWarning>
-      <body className={`font-sans ${GeistSans.variable} ${GeistMono.variable} antialiased`}>
+      <body className={`${inter.className} antialiased`}>
         <Suspense fallback={null}>
-          <ThemeProvider attribute="class" defaultTheme="light" enableSystem disableTransitionOnChange>
+          <Providers>
             {children}
-          </ThemeProvider>
+          </Providers>
         </Suspense>
-        <Analytics />
       </body>
     </html>
   )
